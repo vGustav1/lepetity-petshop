@@ -119,6 +119,7 @@
     color: var(--secondary-deep); font-weight: 700; font-size: 0.85rem;
     text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 12px;
   }
+  .section-label svg { width: 15px; height: 15px; flex-shrink: 0; }
   .section-head { max-width: 640px; }
   .section-head.centered { margin: 0 auto; text-align: center; }
   .section-head h2 { font-size: clamp(1.7rem, 5vw, 2.4rem); }
@@ -149,11 +150,6 @@
     border-color: rgba(250, 247, 241, 0.4); color: var(--bg);
   }
   .btn-ghost-light:hover { background: rgba(250, 247, 241, 0.12); border-color: rgba(250,247,241,0.7); }
-
-  .btn-outline-teal {
-    border-color: var(--secondary); color: var(--secondary-deep); background: transparent;
-  }
-  .btn-outline-teal:hover { background: var(--secondary); color: #fff; }
 
   .btn-sm { padding: 10px 18px; font-size: 0.88rem; }
   .btn-block { width: 100%; }
@@ -189,27 +185,24 @@
   .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
   .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-  .nav-icon-btn {
-    display: flex; align-items: center; justify-content: center;
-    width: 42px; height: 42px; border-radius: 50%; background: var(--whatsapp); color: #fff;
-    box-shadow: 0 6px 16px rgba(37,211,102,0.35);
-  }
-  .nav-icon-btn svg { width: 21px; height: 21px; }
-
   .mobile-menu {
     border-top: 1px solid var(--border);
     background: var(--bg);
     padding: 14px 20px 22px;
   }
-  .mobile-menu a:not(.btn) {
+  .mobile-menu a {
     display: block; padding: 13px 4px; font-weight: 600; font-size: 1.02rem;
     border-bottom: 1px solid var(--border); color: var(--ink);
   }
-  .mobile-menu .btn { margin-top: 16px; }
+  .mobile-menu a:last-child { border-bottom: none; }
+
+  /* ============ DECORATIVE PAWS ============ */
+  .paw-deco { position: absolute; aspect-ratio: 1; pointer-events: none; z-index: 0; }
+  .paw-deco svg { width: 100%; height: 100%; }
 
   /* ============ HERO ============ */
-  .hero { padding: 40px 0 20px; overflow: hidden; }
-  .hero .wrap { display: flex; flex-direction: column; gap: 36px; }
+  .hero { padding: 40px 0 20px; overflow: hidden; position: relative; }
+  .hero .wrap { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 36px; }
   .hero-copy { max-width: 640px; }
   .hero-badge {
     display: inline-flex; align-items: center; gap: 8px;
@@ -289,15 +282,18 @@
     box-shadow: var(--shadow-sm);
   }
   .cat-icon svg { width: 21px; height: 21px; color: var(--secondary-deep); }
-  .cat-body { padding: 20px 22px 22px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+  .cat-body { padding: 18px 20px 20px; display: flex; align-items: flex-end; gap: 12px; flex: 1; }
+  .cat-body .cat-copy { flex: 1; }
   .cat-body h3 { font-size: 1.15rem; }
-  .cat-body p { color: var(--ink-soft); font-size: 0.92rem; flex: 1; }
+  .cat-body p { color: var(--ink-soft); font-size: 0.92rem; margin-top: 4px; }
   .cat-cta {
-    margin-top: 14px; display: inline-flex; align-items: center; gap: 6px;
-    font-weight: 700; font-size: 0.88rem; color: var(--secondary-deep);
+    flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%;
+    background: var(--secondary-soft); color: var(--secondary-deep);
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
   }
-  .cat-cta svg { width: 16px; height: 16px; transition: transform 0.2s ease; }
-  .cat-card:hover .cat-cta svg { transform: translateX(3px); }
+  .cat-cta svg { width: 16px; height: 16px; }
+  .cat-card:hover .cat-cta { background: var(--secondary); color: #fff; transform: translateX(2px); }
 
   /* ============ TRUST ROWS ============ */
   .trust { background: var(--bg-alt); }
@@ -336,7 +332,8 @@
   .testi-card cite { display: block; margin-top: 16px; font-style: normal; font-size: 0.84rem; font-weight: 700; color: var(--ink-soft); }
 
   /* ============ VISIT / LOCALIZAÇÃO ============ */
-  .visit { background: var(--dark); color: var(--bg); }
+  .visit { position: relative; overflow: hidden; background: var(--dark); color: var(--bg); }
+  .visit .wrap { position: relative; z-index: 1; }
   .visit .section-label { color: #7FCFC6; }
   .visit h2 { color: var(--bg); }
   .visit .lede { margin-top: 14px; color: rgba(250,247,241,0.68); max-width: 44ch; font-size: 1.02rem; }
@@ -353,16 +350,6 @@
   .info-row span:first-child { color: rgba(250,247,241,0.55); font-weight: 600; }
   .info-row span:last-child { text-align: right; font-weight: 600; }
   .visit-actions { margin-top: 22px; display: flex; flex-direction: column; gap: 12px; }
-
-  /* ============ FINAL CTA ============ */
-  .final-cta { text-align: center; }
-  .final-cta-inner {
-    background: linear-gradient(160deg, var(--primary-soft-2), var(--primary-soft));
-    border-radius: var(--radius-lg); padding: 56px 24px; box-shadow: var(--shadow-sm);
-  }
-  .final-cta h2 { font-size: clamp(1.7rem, 5.5vw, 2.4rem); max-width: 20ch; margin: 0 auto; }
-  .final-cta p { margin: 14px auto 26px; color: var(--ink-soft); max-width: 44ch; font-size: 1.02rem; }
-  .final-cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
   /* ============ FOOTER ============ */
   .site-footer { background: var(--dark); color: rgba(250,247,241,0.72); padding: 56px 0 26px; }
@@ -409,7 +396,6 @@
     .categories-grid { grid-template-columns: 1fr 1fr; }
     .trust-grid { grid-template-columns: 1fr 1fr; }
     .testimonials-grid { grid-template-columns: 1fr 1fr; }
-    .final-cta-inner { padding: 72px 40px; }
     .footer-grid { grid-template-columns: 1.3fr 1fr 1fr; }
   }
 
@@ -417,7 +403,7 @@
   @media (min-width: 1000px) {
     .nav-links { display: flex; }
     .nav-whatsapp { display: inline-flex; }
-    .nav-toggle, .nav-icon-btn { display: none; }
+    .nav-toggle { display: none; }
     .mobile-menu { display: none !important; }
 
     .hero .wrap { flex-direction: row; align-items: center; }
@@ -458,6 +444,7 @@
   <symbol id="ic-heart" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 21s-7.5-4.6-10-9.3C.5 8.4 2.3 5 5.8 5c2 0 3.4 1 4.2 2.3C10.8 6 12.2 5 14.2 5c3.5 0 5.3 3.4 3.8 6.7C15.5 16.4 12 21 12 21z"/></symbol>
   <symbol id="ic-collar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="4" r="1.6" fill="currentColor"/><circle cx="20" cy="12" r="1.6" fill="currentColor"/><circle cx="12" cy="20" r="1.6" fill="currentColor"/><circle cx="4" cy="12" r="1.6" fill="currentColor"/></symbol>
   <symbol id="ic-store" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 9.5 4.5 4h15L21 9.5M3 9.5a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0M4.5 9.5V20h15V9.5"/></symbol>
+  <symbol id="ic-paw" viewBox="0 0 24 24"><ellipse cx="12" cy="16.2" rx="6" ry="5" fill="currentColor"/><ellipse cx="4.6" cy="9.6" rx="2.3" ry="2.9" fill="currentColor"/><ellipse cx="9.6" cy="5.4" rx="2.1" ry="2.7" fill="currentColor"/><ellipse cx="14.4" cy="5.4" rx="2.1" ry="2.7" fill="currentColor"/><ellipse cx="19.4" cy="9.6" rx="2.3" ry="2.9" fill="currentColor"/></symbol>
 </svg>
 
 <header class="site-header" id="top">
@@ -478,9 +465,6 @@
       <a class="btn btn-whatsapp btn-sm nav-whatsapp" href="https://wa.me/5531990794098?text=Ola!%20Vim%20pelo%20site%20da%20Lepetity%20e%20queria%20saber%20mais%20sobre%20os%20produtos%20disponiveis." target="_blank" rel="noopener">
         <svg><use href="#ic-whatsapp"/></svg> Falar no WhatsApp
       </a>
-      <a class="nav-icon-btn" href="https://wa.me/5531990794098?text=Ola!%20Vim%20pelo%20site%20da%20Lepetity%20e%20queria%20saber%20mais%20sobre%20os%20produtos%20disponiveis." target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
-        <svg><use href="#ic-whatsapp"/></svg>
-      </a>
       <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Abrir menu">
         <span></span><span></span><span></span>
       </button>
@@ -492,15 +476,14 @@
     <a href="#sobre">Sobre</a>
     <a href="#avaliacoes">Avaliações</a>
     <a href="#localizacao">Localização</a>
-    <a class="btn btn-whatsapp btn-block" href="https://wa.me/5531990794098?text=Ola!%20Vim%20pelo%20site%20da%20Lepetity%20e%20queria%20saber%20mais%20sobre%20os%20produtos%20disponiveis." target="_blank" rel="noopener">
-      <svg><use href="#ic-whatsapp"/></svg> Falar no WhatsApp
-    </a>
   </nav>
 </header>
 
 <main id="conteudo">
 
   <section class="hero">
+    <span class="paw-deco" aria-hidden="true" style="width:90px; top:-10px; right:6%; color:var(--primary); opacity:0.15; transform:rotate(18deg);"><svg><use href="#ic-paw"/></svg></span>
+    <span class="paw-deco" aria-hidden="true" style="width:50px; bottom:10%; left:2%; color:var(--secondary); opacity:0.12; transform:rotate(-24deg);"><svg><use href="#ic-paw"/></svg></span>
     <div class="wrap">
       <div class="hero-copy">
         <span class="hero-badge reveal"><span class="stars">★★★★★</span> 5.0 no Google · 76 avaliações</span>
@@ -544,14 +527,14 @@
   <section class="about" id="sobre">
     <div class="wrap grid">
       <div class="about-text reveal">
-        <p class="section-label">Sobre a Lepetity</p>
+        <p class="section-label"><svg><use href="#ic-paw"/></svg> Sobre a Lepetity</p>
         <h2>Um petshop de bairro, com loja completa e atendimento de perto</h2>
         <p>A Lepetity é um petshop físico no Centro de Vespasiano, com variedade de produtos para cães e gatos e atendimento atencioso — a nota máxima no Google reflete isso. Ração, acessórios e itens sob encomenda para o seu pet, tudo num só lugar.</p>
         <ul class="about-facts">
-          <li><svg><use href="#ic-check"/></svg> Ração, brinquedos e casinhas</li>
-          <li><svg><use href="#ic-check"/></svg> Petiscos e cuidados & saúde</li>
-          <li><svg><use href="#ic-check"/></svg> Acessórios de marcas como Terplast</li>
-          <li><svg><use href="#ic-check"/></svg> Itens sob encomenda</li>
+          <li><svg><use href="#ic-paw"/></svg> Ração, brinquedos e casinhas</li>
+          <li><svg><use href="#ic-paw"/></svg> Petiscos e cuidados & saúde</li>
+          <li><svg><use href="#ic-paw"/></svg> Acessórios de marcas como Terplast</li>
+          <li><svg><use href="#ic-paw"/></svg> Itens sob encomenda</li>
         </ul>
       </div>
       <div class="about-media reveal">
@@ -567,91 +550,103 @@
 
   <section class="categories" id="produtos">
     <div class="wrap">
-      <p class="section-label">O que você encontra na loja</p>
+      <p class="section-label"><svg><use href="#ic-paw"/></svg> O que você encontra na loja</p>
       <div class="section-head reveal">
         <h2>Categorias completas para o seu pet</h2>
-        <p>Fotos reais da loja, organizadas por categoria. Não vende pelo site — fale no WhatsApp para saber disponibilidade e preço.</p>
+        <p>Fotos reais da loja. Toque em uma categoria para consultar disponibilidade e preço no WhatsApp.</p>
       </div>
 
       <div class="categories-grid">
-        <article class="cat-card reveal">
+        <a class="cat-card reveal" href="https://wa.me/5531990794098?text=Ola!%20Vi%20no%20site%20que%20a%20Lepetity%20tem%20racao.%20Pode%20me%20informar%20as%20marcas%20e%20precos%20disponiveis%3F" target="_blank" rel="noopener" aria-label="Ração — consultar no WhatsApp">
           <div class="cat-media">
             <img src="images/showcase-racao-caes.jpg" alt="Estoque de ração para cães na Lepetity" loading="lazy">
             <span class="cat-icon"><svg><use href="#ic-bowl"/></svg></span>
           </div>
           <div class="cat-body">
-            <h3>Ração</h3>
-            <p>Rações para cães e gatos, de diversas marcas e fases da vida.</p>
-            <a class="cat-cta" href="https://wa.me/5531990794098?text=Ola!%20Vi%20no%20site%20que%20a%20Lepetity%20tem%20racao.%20Pode%20me%20informar%20as%20marcas%20e%20precos%20disponiveis%3F" target="_blank" rel="noopener">Consultar no WhatsApp <svg><use href="#ic-arrow"/></svg></a>
+            <div class="cat-copy">
+              <h3>Ração</h3>
+              <p>Rações para cães e gatos, de diversas marcas e fases da vida.</p>
+            </div>
+            <span class="cat-cta" aria-hidden="true"><svg><use href="#ic-whatsapp"/></svg></span>
           </div>
-        </article>
+        </a>
 
-        <article class="cat-card reveal">
+        <a class="cat-card reveal" href="https://wa.me/5531990794098?text=Ola!%20Vi%20no%20site%20que%20a%20Lepetity%20tem%20brinquedos%20para%20pets.%20Pode%20me%20mostrar%20as%20opcoes%20disponiveis%3F" target="_blank" rel="noopener" aria-label="Brinquedos — consultar no WhatsApp">
           <div class="cat-media">
             <img src="images/showcase-brinquedos-casinhas.jpg" alt="Brinquedos organizados nas prateleiras da Lepetity" loading="lazy">
             <span class="cat-icon"><svg><use href="#ic-ball"/></svg></span>
           </div>
           <div class="cat-body">
-            <h3>Brinquedos</h3>
-            <p>Opções para todos os tamanhos e estilos de pet, para brincar e gastar energia.</p>
-            <a class="cat-cta" href="https://wa.me/5531990794098?text=Ola!%20Vi%20no%20site%20que%20a%20Lepetity%20tem%20brinquedos%20para%20pets.%20Pode%20me%20mostrar%20as%20opcoes%20disponiveis%3F" target="_blank" rel="noopener">Consultar no WhatsApp <svg><use href="#ic-arrow"/></svg></a>
+            <div class="cat-copy">
+              <h3>Brinquedos</h3>
+              <p>Opções para todos os tamanhos e estilos de pet, para brincar e gastar energia.</p>
+            </div>
+            <span class="cat-cta" aria-hidden="true"><svg><use href="#ic-whatsapp"/></svg></span>
           </div>
-        </article>
+        </a>
 
-        <article class="cat-card reveal">
+        <a class="cat-card reveal" href="https://wa.me/5531990794098?text=Ola!%20Vi%20no%20site%20que%20a%20Lepetity%20tem%20casinhas%20para%20pets.%20Pode%20me%20informar%20os%20tamanhos%20e%20precos%3F" target="_blank" rel="noopener" aria-label="Casinhas — consultar no WhatsApp">
           <div class="cat-media">
             <img src="images/showcase-brinquedos-casinhas.jpg" alt="Casinhas e caixas de transporte para pets na Lepetity" loading="lazy">
             <span class="cat-icon"><svg><use href="#ic-house"/></svg></span>
           </div>
           <div class="cat-body">
-            <h3>Casinhas</h3>
-            <p>Casinhas e caixas de transporte em diferentes tamanhos e cores.</p>
-            <a class="cat-cta" href="https://wa.me/5531990794098?text=Ola!%20Vi%20no%20site%20que%20a%20Lepetity%20tem%20casinhas%20para%20pets.%20Pode%20me%20informar%20os%20tamanhos%20e%20precos%3F" target="_blank" rel="noopener">Consultar no WhatsApp <svg><use href="#ic-arrow"/></svg></a>
+            <div class="cat-copy">
+              <h3>Casinhas</h3>
+              <p>Casinhas e caixas de transporte em diferentes tamanhos e cores.</p>
+            </div>
+            <span class="cat-cta" aria-hidden="true"><svg><use href="#ic-whatsapp"/></svg></span>
           </div>
-        </article>
+        </a>
 
-        <article class="cat-card reveal">
+        <a class="cat-card reveal" href="https://wa.me/5531990794098?text=Ola!%20Vi%20no%20site%20que%20a%20Lepetity%20tem%20petiscos%20para%20pets.%20Pode%20me%20indicar%20as%20opcoes%20disponiveis%3F" target="_blank" rel="noopener" aria-label="Petiscos — consultar no WhatsApp">
           <div class="cat-media">
             <img src="images/showcase-petiscos.jpg" alt="Corredor com petiscos para cães e gatos na Lepetity" loading="lazy">
             <span class="cat-icon"><svg><use href="#ic-bone"/></svg></span>
           </div>
           <div class="cat-body">
-            <h3>Petiscos</h3>
-            <p>Petiscos e guloseimas de diversas marcas para recompensar o seu pet.</p>
-            <a class="cat-cta" href="https://wa.me/5531990794098?text=Ola!%20Vi%20no%20site%20que%20a%20Lepetity%20tem%20petiscos%20para%20pets.%20Pode%20me%20indicar%20as%20opcoes%20disponiveis%3F" target="_blank" rel="noopener">Consultar no WhatsApp <svg><use href="#ic-arrow"/></svg></a>
+            <div class="cat-copy">
+              <h3>Petiscos</h3>
+              <p>Petiscos e guloseimas de diversas marcas para recompensar o seu pet.</p>
+            </div>
+            <span class="cat-cta" aria-hidden="true"><svg><use href="#ic-whatsapp"/></svg></span>
           </div>
-        </article>
+        </a>
 
-        <article class="cat-card reveal">
+        <a class="cat-card reveal" href="https://wa.me/5531990794098?text=Ola!%20Vi%20no%20site%20que%20a%20Lepetity%20tem%20produtos%20de%20cuidados%20e%20saude.%20Pode%20me%20ajudar%20a%20encontrar%20o%20que%20preciso%3F" target="_blank" rel="noopener" aria-label="Cuidados e Saúde — consultar no WhatsApp">
           <div class="cat-media">
             <img src="images/showcase-cuidados-saude.jpg" alt="Balcão com medicamentos e produtos de cuidados na Lepetity" loading="lazy">
             <span class="cat-icon"><svg><use href="#ic-heart"/></svg></span>
           </div>
           <div class="cat-body">
-            <h3>Cuidados & Saúde</h3>
-            <p>Produtos para higiene, saúde e bem-estar do seu pet no dia a dia.</p>
-            <a class="cat-cta" href="https://wa.me/5531990794098?text=Ola!%20Vi%20no%20site%20que%20a%20Lepetity%20tem%20produtos%20de%20cuidados%20e%20saude.%20Pode%20me%20ajudar%20a%20encontrar%20o%20que%20preciso%3F" target="_blank" rel="noopener">Consultar no WhatsApp <svg><use href="#ic-arrow"/></svg></a>
+            <div class="cat-copy">
+              <h3>Cuidados & Saúde</h3>
+              <p>Produtos para higiene, saúde e bem-estar do seu pet no dia a dia.</p>
+            </div>
+            <span class="cat-cta" aria-hidden="true"><svg><use href="#ic-whatsapp"/></svg></span>
           </div>
-        </article>
+        </a>
 
-        <article class="cat-card reveal">
+        <a class="cat-card reveal" href="https://wa.me/5531990794098?text=Ola!%20Vi%20no%20site%20que%20a%20Lepetity%20tem%20acessorios%20como%20coleiras%20e%20guias.%20Pode%20me%20mostrar%20as%20opcoes%20disponiveis%3F" target="_blank" rel="noopener" aria-label="Acessórios — consultar no WhatsApp">
           <div class="cat-media">
             <img src="images/acessorios-coleiras.jpg" alt="Coleiras decoradas para cães na Lepetity" loading="lazy">
             <span class="cat-icon"><svg><use href="#ic-collar"/></svg></span>
           </div>
           <div class="cat-body">
-            <h3>Acessórios</h3>
-            <p>Coleiras e guias de marcas como Terplast, para todos os tamanhos e gostos.</p>
-            <a class="cat-cta" href="https://wa.me/5531990794098?text=Ola!%20Vi%20no%20site%20que%20a%20Lepetity%20tem%20acessorios%20como%20coleiras%20e%20guias.%20Pode%20me%20mostrar%20as%20opcoes%20disponiveis%3F" target="_blank" rel="noopener">Consultar no WhatsApp <svg><use href="#ic-arrow"/></svg></a>
+            <div class="cat-copy">
+              <h3>Acessórios</h3>
+              <p>Coleiras e guias de marcas como Terplast, para todos os tamanhos e gostos.</p>
+            </div>
+            <span class="cat-cta" aria-hidden="true"><svg><use href="#ic-whatsapp"/></svg></span>
           </div>
-        </article>
+        </a>
       </div>
     </div>
   </section>
 
   <section class="trust">
     <div class="wrap">
-      <p class="section-label">Por que a Lepetity</p>
+      <p class="section-label"><svg><use href="#ic-paw"/></svg> Por que a Lepetity</p>
       <div class="section-head reveal">
         <h2>Confiança de quem já é cliente</h2>
       </div>
@@ -677,7 +672,7 @@
 
   <section class="reviews" id="avaliacoes">
     <div class="wrap">
-      <p class="section-label">Avaliações</p>
+      <p class="section-label"><svg><use href="#ic-paw"/></svg> Avaliações</p>
       <div class="section-head centered reveal">
         <h2>Clientes apaixonados, pets ainda mais</h2>
       </div>
@@ -710,8 +705,10 @@
   </section>
 
   <section class="visit" id="localizacao">
+    <span class="paw-deco" aria-hidden="true" style="width:70px; top:8%; right:4%; color:var(--bg); opacity:0.06; transform:rotate(-15deg);"><svg><use href="#ic-paw"/></svg></span>
+    <span class="paw-deco" aria-hidden="true" style="width:44px; bottom:6%; left:6%; color:var(--bg); opacity:0.06; transform:rotate(20deg);"><svg><use href="#ic-paw"/></svg></span>
     <div class="wrap">
-      <p class="section-label">Visite a loja</p>
+      <p class="section-label"><svg><use href="#ic-paw"/></svg> Visite a loja</p>
       <h2>Lepetity Petshop em Vespasiano</h2>
       <p class="lede">Atendimento presencial no Centro de Vespasiano, ou fale antes pelo WhatsApp pra já chegar sabendo se tem o que você precisa.</p>
 
@@ -738,20 +735,6 @@
     </div>
   </section>
 
-  <section class="final-cta">
-    <div class="wrap">
-      <div class="final-cta-inner reveal">
-        <h2>Pronto para cuidar do seu pet com quem entende?</h2>
-        <p>Fale agora com a Lepetity pelo WhatsApp e tire suas dúvidas sobre produtos, disponibilidade e preços.</p>
-        <div class="final-cta-actions">
-          <a class="btn btn-whatsapp" href="https://wa.me/5531990794098?text=Ola!%20Tenho%20uma%20duvida%20sobre%20os%20produtos%20da%20Lepetity." target="_blank" rel="noopener">
-            <svg><use href="#ic-whatsapp"/></svg> Tenho uma dúvida
-          </a>
-          <a class="btn btn-outline-teal" href="#localizacao">Ver localização</a>
-        </div>
-      </div>
-    </div>
-  </section>
 
 </main>
 
